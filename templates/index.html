@@ -2,21 +2,21 @@
 
 {% block content %}
 
-	{% for place in places %}
-		<h3>{{ place.name }}</h3>
-		<p>
-			{{ place.description|linebreaksbr }}
-		</p>
-		<h3>Reviews</h3>
-		{% for review in place.review_set.all %}
-		<blockquote>
-			{{ review.comment }}
-			<small>
-				{{ review.user.username }}
-			</small>
-		</blockquote>
-		{% endfor %}
+    {% for place in places %}
+        <h3>{{ place.name }}</h3>
+        <p>
+            {{ place.description|linebreaksbr }}
+        </p>
+        <h3>Reviews</h3>
+        {% for review in place.review_set.all %}
+        <blockquote>
+            {{ review.comment }}
+            <small>
+                {{ review.user.username }}
+            </small>
+        </blockquote>
+        {% endfor %}
 
-	{% endfor %}
+    {% endfor %}
 
 {% endblock %}

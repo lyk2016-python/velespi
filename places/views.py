@@ -3,10 +3,10 @@ from places.models import Place
 
 
 def index(request):
-	return render(
-		request,
-		'index.html',
-		{
-			'places': Place.objects.all(),
-		}
-	)
+    return render(
+        request,
+        'index.html',
+        {
+            'places': Place.objects.all(),
+        }
+    )
