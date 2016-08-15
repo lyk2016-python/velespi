@@ -1,10 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>{% block title %}Velespi{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
 </head>
 <body>
-{% block content %}
-{% endblock %}
+<div class="container">
+	<header class="header">
+		<div id="logo">
+			<a href="/">velespi</a>
+		</div>
+		<div id="nav">
+			<a href="#">Anasayfa</a>
+			<a href="#">Kayıt</a>
+			<a href="#">Giriş</a>
+		</div>
+	</header>
+	<div class="content">
+		{% block content %}
+			PLACEHOLDER
+		{% endblock %}
+	</div>
+	<footer class="footer">
+		Linux Yaz Kampı 2016 - Django Sınıfı örnek projesidir.
+	</footer>
+</div>
 </body>
 </html>
