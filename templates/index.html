@@ -3,7 +3,9 @@
 {% block content %}
 
      {% for place in places %}
-        <h3>{{ place.name }}</h3>
+        <h3>
+            <a href="{{ place.get_absolute_url }}">{{ place.name }}</a>
+        </h3>
         <p>
             {{ place.description|linebreaksbr }}
         </p>

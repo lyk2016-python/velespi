@@ -13,9 +13,6 @@ class Category(models.Model):
         return smart_text(self.name)
 
 class PlaceManager(models.Manager):
-    def set_wifi_true(self):
-        return self.get_queryset().update(has_wifi=True)
-
     def get_queryset(self):
         qs = super(PlaceManager, self).get_queryset()
         return qs.filter(user__is_active=True)
@@ -40,6 +37,10 @@ class Place(models.Model):
 
     def __str__(self):
         return smart_text(self.name)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('place_detail', (self.id,))
 
     def review_count(self):
         return self.review_set.count()

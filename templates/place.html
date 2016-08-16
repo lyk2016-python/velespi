@@ -2,11 +2,11 @@
 
 {% block content %}
 
-    {% for place in places %}
-        <h3>{{ place.name }}</h3>
-        <p>
-            {{ place.description|linebreaksbr }}
-        </p>
+    <h3>{{ place.name }}</h3>
+    <p>
+        {{ place.description|linebreaksbr }}
+    </p>
+    {% if place.review_count > 0 %}
         <h3>Reviews</h3>
         {% for review in place.review_set.all %}
         <blockquote>
@@ -16,7 +16,10 @@
             </small>
         </blockquote>
         {% endfor %}
+    {% endif %}
 
+    {% for media in place.media_set.all %}
+        <img src="{{ media }}">
     {% endfor %}
 
 {% endblock %}

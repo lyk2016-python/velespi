@@ -17,11 +17,12 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.conf import settings
 from django.views.static import serve
-from places.views import index
+from places.views import index, detail
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index),
+    url(r'^places/(?P<id>\d+)$', detail, name='place_detail'),
 ]
 
 if settings.DEBUG:
