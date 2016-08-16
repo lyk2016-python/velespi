@@ -12,6 +12,19 @@ class Category(models.Model):
     def __str__(self):
         return smart_text(self.name)
 
+class PlaceManager(models.Manager):
+    def set_wifi_true(self):
+        return self.get_queryset().update(has_wifi=True)
+
+    def get_queryset(self):
+        qs = super(PlaceManager, self).get_queryset()
+        return qs.filter(user__is_active=True)
+
+    def active_places(self):
+        return self.get_queryset().filter(
+            is_active=True,
+        )
+
 class Place(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     name = models.CharField(max_length=255)
@@ -22,8 +35,14 @@ class Place(models.Model):
     telephone = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
+    objects = PlaceManager()
+    all_objects = models.Manager()
+
     def __str__(self):
         return smart_text(self.name)
+
+    def review_count(self):
+        return self.review_set.count()
 
 class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
