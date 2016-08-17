@@ -26,7 +26,7 @@ class Place(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=False)
-    coordinates = models.CharField(max_length=255, null=True, blank=True)
+    coordinates = models.CharField(max_length=255, null=True, blank=False)
     category = models.ForeignKey(Category, blank=True, null=True)
     has_wifi = models.BooleanField(default=False)
     telephone = models.CharField(max_length=255, blank=True, null=True)
