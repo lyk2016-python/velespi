@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.conf import settings
 from django.views.static import serve
-from places.views import index, detail
+from places.views import index, detail, new_place
 from profiles.views import register, login, logout
 
 urlpatterns = [
@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^login$', login, name="login"),
     url(r'^logout$', logout, name="logout"),
     url(r'^places/(?P<id>\d+)$', detail, name='place_detail'),
+    url(r'^new-place$', new_place, name="new_place"),
 ]
 
 if settings.DEBUG:
