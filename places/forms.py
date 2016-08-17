@@ -36,4 +36,4 @@ class PlaceCreationForm(ModelForm):
 		except ValueError:
 			raise ValidationError('Koordinat girin.')
 
-		return self.cleaned_data
+		return coords
