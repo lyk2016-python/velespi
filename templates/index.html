@@ -2,6 +2,8 @@
 
 {% block content %}
 
+    <div id="map" style="height: 300px"></div>
+
      {% for place in places %}
         <h3>
             <a href="{{ place.get_absolute_url }}">{{ place.name }}</a>
@@ -22,5 +24,21 @@
         {% endif %}
 
     {% endfor %}
+
+{% endblock %}
+
+{% block js %}
+<script>
+var map = L.map('map').setView([40.705601,31.678499], 12);
+
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+{% for place in places %}
+L.marker([{{ place.coordinates }}]).addTo(map)
+    .bindPopup('{{ place.name }}');
+{% endfor %}
+</script>
 
 {% endblock %}

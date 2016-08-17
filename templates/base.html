@@ -4,6 +4,7 @@
 <head>
 	<title>{% block title %}Velespi{% endblock %}</title>
 	<link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
+	<link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
 </head>
 <body>
 <div class="container">
@@ -37,5 +38,11 @@
 		Linux Yaz Kampı 2016 - Django Sınıfı örnek projesidir.
 	</footer>
 </div>
+
+<script src="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.js"></script>
+
+{% block js %}
+{% endblock %}
+
 </body>
 </html>
