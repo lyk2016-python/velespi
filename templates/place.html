@@ -9,12 +9,12 @@
     {% if place.review_count > 0 %}
         <h3>Reviews</h3>
         {% for review in place.review_set.all %}
-        <blockquote>
-            {{ review.comment }}
-            <small>
-                {{ review.user.username }}
-            </small>
-        </blockquote>
+            <blockquote>
+                {{ review.comment }}
+                <small>
+                    {{ review.user.username }}
+                </small>
+            </blockquote>
         {% endfor %}
     {% endif %}
 

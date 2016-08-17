@@ -2,40 +2,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{% block title %}Velespi{% endblock %}</title>
-	<link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
+    <title>{% block title %}Velespi{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
 </head>
 <body>
 <div class="container">
-	{% if messages %}
-	<ul class="messages">
-	    {% for message in messages %}
-	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-	    {% endfor %}
-	</ul>
-	{% endif %}
-	<header class="header">
-		<div id="logo">
-			<a href="/">velespi</a>
-		</div>
-		<div id="nav">
-			<a href="/">Anasayfa</a>
-			{% if user.is_authenticated %}
-			<a href="{% url "logout" %}">Çıkış yap ({{ user }})</a>
-			{% else %}
-			<a href="{% url "register" %}">Kayıt</a>
-			<a href="{% url "login" %}">Giriş</a>
-			{% endif %}
-		</div>
-	</header>
-	<div class="content">
-		{% block content %}
-			PLACEHOLDER
-		{% endblock %}
-	</div>
-	<footer class="footer">
-		Linux Yaz Kampı 2016 - Django Sınıfı örnek projesidir.
-	</footer>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <header class="header">
+        <div id="logo">
+            <a href="/">velespi</a>
+        </div>
+        <div id="nav">
+            <a href="/">Anasayfa</a>
+            {% if user.is_authenticated %}
+                <a href="{% url "logout" %}">Çıkış yap ({{ user }})</a>
+            {% else %}
+                <a href="{% url "register" %}">Kayıt</a>
+                <a href="{% url "login" %}">Giriş</a>
+            {% endif %}
+        </div>
+    </header>
+    <div class="content">
+        {% block content %}
+            PLACEHOLDER
+        {% endblock %}
+    </div>
+    <footer class="footer">
+        Linux Yaz Kampı 2016 - Django Sınıfı örnek projesidir.
+    </footer>
 </div>
 </body>
 </html>

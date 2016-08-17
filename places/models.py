@@ -4,13 +4,14 @@ from django.utils.encoding import smart_text
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(u'Category Name', max_length=255)
 
     class Meta:
         verbose_name_plural = "Categories"
 
     def __str__(self):
         return smart_text(self.name)
+
 
 class PlaceManager(models.Manager):
     def get_queryset(self):
@@ -22,15 +23,16 @@ class PlaceManager(models.Manager):
             is_active=True,
         )
 
+
 class Place(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    name = models.CharField(max_length=255)
-    is_active = models.BooleanField(default=False)
-    coordinates = models.CharField(max_length=255, null=True, blank=True)
+    name = models.CharField(u'Place Name', max_length=255)
+    is_active = models.BooleanField(u'Confirm', default=False)
+    coordinates = models.CharField(u'Coordinates', max_length=255, null=True, blank=True)
     category = models.ForeignKey(Category, blank=True, null=True)
-    has_wifi = models.BooleanField(default=False)
-    telephone = models.CharField(max_length=255, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
+    has_wifi = models.BooleanField(u'Have Wifi?', default=False)
+    telephone = models.CharField(u'Telephone', max_length=255, blank=True, null=True)
+    description = models.TextField(u'Description', blank=True, null=True)
 
     objects = PlaceManager()
     all_objects = models.Manager()
@@ -45,6 +47,7 @@ class Place(models.Model):
     def review_count(self):
         return self.review_set.count()
 
+
 class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     place = models.ForeignKey(Place)
@@ -53,6 +56,7 @@ class Review(models.Model):
 
     def __str__(self):
         return smart_text(self.comment)
+
 
 class Media(models.Model):
     place = models.ForeignKey(Place)

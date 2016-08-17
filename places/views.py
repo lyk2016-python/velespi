@@ -13,7 +13,7 @@ def index(request):
 
 
 def detail(request, id):
-	return render(
+    return render(
         request,
         'place.html',
         {
