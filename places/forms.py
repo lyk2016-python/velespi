@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, HiddenInput
 
 from places.models import Place
 
@@ -13,3 +13,6 @@ class PlaceCreationForm(ModelForm):
 			'telephone',
 			'description',
 		)
+		widgets = {
+			'coordinates': HiddenInput
+		}

@@ -35,10 +35,18 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+var markers = [];
+
 {% for place in places %}
-L.marker([{{ place.coordinates }}]).addTo(map)
+var marker = L.marker([{{ place.coordinates }}]).addTo(map)
     .bindPopup('{{ place.name }}');
+
+markers.push(marker);
 {% endfor %}
+
+var featureGroup = L.featureGroup(markers).addTo(map);
+
+map.fitBounds(featureGroup.getBounds());
 </script>
 
 {% endblock %}
