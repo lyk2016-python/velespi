@@ -3,6 +3,7 @@
 {% block content %}
 
     <h3>{{ place.name }}</h3>
+    <div id="map"></div>
     <p>
         {{ place.description|linebreaksbr }}
     </p>
@@ -18,8 +19,33 @@
         {% endfor %}
     {% endif %}
 
+    <h3>Fotoğraflar</h3>
     {% for media in place.media_set.all %}
         <img src="{{ media }}">
+    {% empty %}
+        <p>
+            Bu yerin hiç fotoğrafı yok.
+            <a href="{% url "new_media" place.id %}">Bir tane ekle.</a>
+        </p>
     {% endfor %}
+
+{% endblock %}
+
+{% block js %}
+<script>
+var map = L.map('map').setView([{{ place.coordinates }}], 12);
+
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var marker = L.marker([{{ place.coordinates }}]).addTo(map)
+    .bindPopup(
+        '<a href="{{ place.get_absolute_url }}">' + 
+        '{{ place.name }}' +
+        '</a>'
+    );
+
+</script>
 
 {% endblock %}

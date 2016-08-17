@@ -2,7 +2,7 @@ from django.forms import (
 	ModelForm, HiddenInput, ValidationError
 )
 
-from places.models import Place
+from places.models import Place, Media
 
 class PlaceCreationForm(ModelForm):
 	class Meta:
@@ -37,3 +37,9 @@ class PlaceCreationForm(ModelForm):
 			raise ValidationError('Koordinat girin.')
 
 		return coords
+
+
+class MediaCreationForm(ModelForm):
+	class Meta:
+		model = Media
+		fields = ('image', )
