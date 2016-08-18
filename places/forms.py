@@ -2,7 +2,7 @@ from django.forms import (
 	ModelForm, HiddenInput, ValidationError
 )
 
-from places.models import Place, Media
+from places.models import Place, Media, Review
 
 class PlaceCreationForm(ModelForm):
 	class Meta:
@@ -43,3 +43,9 @@ class MediaCreationForm(ModelForm):
 	class Meta:
 		model = Media
 		fields = ('image', )
+
+
+class ReviewCreationForm(ModelForm):
+	class Meta:
+		model = Review
+		fields = ('comment', 'vote')

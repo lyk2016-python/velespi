@@ -11,7 +11,8 @@
         <h3>Reviews</h3>
         {% for review in place.review_set.all %}
         <blockquote>
-            {{ review.comment }}
+            {{ review.comment }} 
+            ({{ review.vote }})
             <small>
                 {{ review.user.username }}
             </small>
@@ -25,9 +26,13 @@
     {% empty %}
         <p>
             Bu yerin hiç fotoğrafı yok.
-            <a href="{% url "new_media" place.id %}">Bir tane ekle.</a>
         </p>
     {% endfor %}
+
+    <p>
+        <a href="{% url "new_media" place.id %}">Fotoğraf ekle</a>
+        <a href="{% url "new_review" place.id %}">Yorum ekle</a>
+    </p>
 
 {% endblock %}
 

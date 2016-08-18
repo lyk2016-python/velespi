@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 
 from places.models import Place
-from places.forms import PlaceCreationForm, MediaCreationForm
+from places.forms import PlaceCreationForm, MediaCreationForm, ReviewCreationForm
 
 
 def index(request):
@@ -60,6 +60,27 @@ def new_media(request, place_id):
     return render(
         request,
         'new_media.html',
+        {
+            'place': place,
+            'form': form,
+        }
+    )
+
+def new_review(request, place_id):
+    place = get_object_or_404(Place, id=place_id)
+    form = ReviewCreationForm()
+
+    if request.method == "POST":
+        form = ReviewCreationForm(request.POST)
+        if form.is_valid():
+            form.instance.user = request.user
+            form.instance.place = place
+            form.save()
+            return redirect(place.get_absolute_url())
+
+    return render(
+        request,
+        'new_review.html',
         {
             'place': place,
             'form': form,
