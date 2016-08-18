@@ -61,18 +61,22 @@ var marker = L.marker([{{ place.coordinates }}]).addTo(map)
     );
 
 $('#like').on('click', function (event) {
-    $.getJSON(
-        $("#like").attr('href'),
-        function (response) {
-            $('#like-count').html(response.count);
-
-            if (response.action === 'like') {
-                $('#like').html('Beğenmekten vazgeç');
-            } else {
-                $('#like').html('Beğen');
-            }
+    $.ajax({
+        url: $("#like").attr('href'),
+        method: 'POST',
+        dataType: 'json',
+        data: {
+          csrfmiddlewaretoken: "{{ csrf_token }}"  
         }
-    );
+    }).done(function (response) {
+        $('#like-count').html(response.count);
+
+        if (response.action === 'like') {
+            $('#like').html('Beğenmekten vazgeç');
+        } else {
+            $('#like').html('Beğen');
+        }
+    });
     event.preventDefault();
 });
 </script>
