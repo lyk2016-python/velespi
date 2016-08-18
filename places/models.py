@@ -23,7 +23,8 @@ class PlaceManager(models.Manager):
         )
 
 class Place(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, 
+                             related_name='added_places')
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=False)
     coordinates = models.CharField(max_length=255, null=True, blank=False)
@@ -31,6 +32,8 @@ class Place(models.Model):
     has_wifi = models.BooleanField(default=False)
     telephone = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
+                                   related_name='liked_places')
 
     objects = PlaceManager()
     all_objects = models.Manager()

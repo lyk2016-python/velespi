@@ -3,6 +3,15 @@
 {% block content %}
 
     <h3>{{ place.name }}</h3>
+    <p>
+        <span id="like-count">{{ place.likes.count }}</span> kişi beğendi.
+
+        {% if user in place.likes.all %}
+        <a id="like" href="{% url "like_place" place.id %}">Beğenmekten vazgeç</a>
+        {% else %}
+        <a id="like" href="{% url "like_place" place.id %}">Beğen</a>
+        {% endif %}
+    </p>
     <div id="map"></div>
     <p>
         {{ place.description|linebreaksbr }}
@@ -51,6 +60,20 @@ var marker = L.marker([{{ place.coordinates }}]).addTo(map)
         '</a>'
     );
 
-</script>
+$('#like').on('click', function (event) {
+    $.getJSON(
+        $("#like").attr('href'),
+        function (response) {
+            $('#like-count').html(response.count);
 
+            if (response.action === 'like') {
+                $('#like').html('Beğenmekten vazgeç');
+            } else {
+                $('#like').html('Beğen');
+            }
+        }
+    );
+    event.preventDefault();
+});
+</script>
 {% endblock %}
