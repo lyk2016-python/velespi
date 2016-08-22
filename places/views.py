@@ -18,14 +18,16 @@ def index(request):
         }
     )
 
+
 def detail(request, id):
-	return render(
+    return render(
         request,
         'place.html',
         {
             'place': get_object_or_404(Place, id=id),
         }
     )
+
 
 @login_required(login_url='login')
 def new_place(request):
@@ -51,6 +53,7 @@ def new_place(request):
         }
     )
 
+
 @login_required(login_url='login')
 def new_media(request, place_id):
     place = get_object_or_404(Place, id=place_id)
@@ -71,6 +74,7 @@ def new_media(request, place_id):
             'form': form,
         }
     )
+
 
 @login_required(login_url='login')
 def new_review(request, place_id):
@@ -94,12 +98,13 @@ def new_review(request, place_id):
         }
     )
 
+
 @login_required(login_url='login')
 def like_place(request, place_id):
     place = get_object_or_404(Place, id=place_id)
 
     if request.method == "POST":
-        
+
         if request.user in place.likes.all():
             place.likes.remove(request.user)
             action = 'unlike'

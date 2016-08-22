@@ -1,10 +1,14 @@
 body {
-	font-family: Helvetica;
+	font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+	background-color: #f1f1f1;
 }
 
 .container {
-	width: 600px;
+	width: 970px;
 	margin: auto;
+	box-shadow: 0 1px 4px rgba(0, 173, 239, 0.39), 0 0 20px rgba(0, 173, 239, 0.09) inset;
+	background-color: #ECEFF1;
+	padding: 12px 12px 0;
 }
 
 #logo {
@@ -15,14 +19,16 @@ body {
 
 #logo a {
 	display: inline-block;
-	padding: 20px 10px;
-	color: black;
-	font-size: 2em;
-	text-decoration: none;
-	font-weight: normal;
-	color: black;
-	border-radius: 5px;
+    margin: 11px 15px;
 }
+
+.logo-img{
+	width: 256px;
+    height: 50px;
+	background-size: auto;
+	background: url(velespii-logo.svg) no-repeat;
+}
+
 
 .header {
 	margin: 10px 0;
@@ -30,8 +36,8 @@ body {
 }
 
 .content {
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
+	border-top: 1px dashed #00adef;
+	border-bottom: 1px dashed #00adef;
 	padding: 30px 0;
 }
 
@@ -40,15 +46,92 @@ body {
 }
 
 #nav {
-	width: 400px;
+	width: 65%;
 	margin: 35px auto;
 	float: right;
 	text-align: center;
 }
 
 #nav a {
-	color: black;
-	margin: 0 10px;
+	color: #37474f;
+	background: none;
+	text-decoration: none;
+    border: none;
+    height: 60px;
+	border-radius: 40px;
+	font-weight: 500;
+	min-width: 150px;
+	max-width: 250px;
+	margin: 1em;
+	padding: 1em 2em;
+	position: relative;
+	z-index: 1;
+}
+
+#nav  .button,
+#nav .button-alt{
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+	-webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+}
+
+
+#nav ::before,
+#nav ::after{
+	content: '';
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 95%;
+    height: 95%;
+    -webkit-backface-visibility: hidden;
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+    -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+    transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+}
+
+#nav ::before{
+	border: 2px solid #00adef;
+    opacity: 0;
+    -webkit-transform: scale3d(1.2, 1.2, 1);
+    transform: scale3d(1.2, 1.2, 1);
+}
+
+#nav .button::before {
+	border-color: #7986cb;
+}
+#nav .button-alt::before {
+	border-color: #3f51b5;
+}
+#nav ::after {
+	background: #fff;
+}
+#nav .button::after {
+	background: #7986cb;
+}
+#nav  .button-alt::after {
+	background: #3f51b5;
+}
+#nav  .button:hover {
+	color: #7986cb;
+}
+#nav .button-alt:hover {
+	color: #3f51b5;
+}
+#nav :hover::before {
+	opacity: 1;
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+}
+#nav :hover::after {
+	opacity: 0;
+	-webkit-transform: scale3d(0.8, 0.8, 1);
+	transform: scale3d(0.8, 0.8, 1);
 }
 
 h3 {
@@ -66,5 +149,6 @@ form label {
 }
 
 #map {
-	height: 300px;
+	height: 485px;
+	border: 1px dashed #00adef;
 }
