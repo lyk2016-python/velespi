@@ -12,6 +12,7 @@ class Category(models.Model):
     def __str__(self):
         return smart_text(self.name)
 
+
 class PlaceManager(models.Manager):
     def get_queryset(self):
         qs = super(PlaceManager, self).get_queryset()
@@ -22,8 +23,9 @@ class PlaceManager(models.Manager):
             is_active=True,
         )
 
+
 class Place(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, 
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              related_name='added_places')
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=False)
@@ -48,6 +50,7 @@ class Place(models.Model):
     def review_count(self):
         return self.review_set.count()
 
+
 class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     place = models.ForeignKey(Place)
@@ -65,6 +68,7 @@ class Review(models.Model):
 
     def __str__(self):
         return smart_text(self.comment)
+
 
 class Media(models.Model):
     place = models.ForeignKey(Place)

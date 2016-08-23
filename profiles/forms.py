@@ -7,9 +7,10 @@ from django import forms
 
 
 class RegistrationForm(UserCreationForm):
-	class Meta:
-		fields = ['username', 'email']
-		model = User
+    class Meta:
+        fields = ['username', 'email']
+        model = User
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(required=True)

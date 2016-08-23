@@ -7,9 +7,9 @@
         <span id="like-count">{{ place.likes.count }}</span> kişi beğendi.
 
         {% if user in place.likes.all %}
-        <a id="like" href="{% url "like_place" place.id %}">Beğenmekten vazgeç</a>
+            <a id="like" href="{% url "like_place" place.id %}">Beğenmekten vazgeç</a>
         {% else %}
-        <a id="like" href="{% url "like_place" place.id %}">Beğen</a>
+            <a id="like" href="{% url "like_place" place.id %}">Beğen</a>
         {% endif %}
     </p>
     <div id="map"></div>
@@ -19,13 +19,13 @@
     {% if place.review_count > 0 %}
         <h3>Reviews</h3>
         {% for review in place.review_set.all %}
-        <blockquote>
-            {{ review.comment }} 
-            ({{ review.vote }})
-            <small>
-                {{ review.user.username }}
-            </small>
-        </blockquote>
+            <blockquote>
+                {{ review.comment }}
+                ({{ review.vote }})
+                <small>
+                    {{ review.user.username }}
+                </small>
+            </blockquote>
         {% endfor %}
     {% endif %}
 
@@ -46,38 +46,38 @@
 {% endblock %}
 
 {% block js %}
-<script>
-var map = L.map('map').setView([{{ place.coordinates }}], 12);
+    <script>
+        var map = L.map('map').setView([{{ place.coordinates }}], 12);
 
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
 
-var marker = L.marker([{{ place.coordinates }}]).addTo(map)
-    .bindPopup(
-        '<a href="{{ place.get_absolute_url }}">' + 
-        '{{ place.name }}' +
-        '</a>'
-    );
+        var marker = L.marker([{{ place.coordinates }}]).addTo(map)
+                .bindPopup(
+                        '<a href="{{ place.get_absolute_url }}">' +
+                        '{{ place.name }}' +
+                        '</a>'
+                );
 
-$('#like').on('click', function (event) {
-    $.ajax({
-        url: $("#like").attr('href'),
-        method: 'POST',
-        dataType: 'json',
-        data: {
-          csrfmiddlewaretoken: "{{ csrf_token }}"  
-        }
-    }).done(function (response) {
-        $('#like-count').html(response.count);
+        $('#like').on('click', function (event) {
+            $.ajax({
+                url: $("#like").attr('href'),
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    csrfmiddlewaretoken: "{{ csrf_token }}"
+                }
+            }).done(function (response) {
+                $('#like-count').html(response.count);
 
-        if (response.action === 'like') {
-            $('#like').html('Beğenmekten vazgeç');
-        } else {
-            $('#like').html('Beğen');
-        }
-    });
-    event.preventDefault();
-});
-</script>
+                if (response.action === 'like') {
+                    $('#like').html('Beğenmekten vazgeç');
+                } else {
+                    $('#like').html('Beğen');
+                }
+            });
+            event.preventDefault();
+        });
+    </script>
 {% endblock %}
